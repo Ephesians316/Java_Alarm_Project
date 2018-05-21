@@ -1,0 +1,104 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.util.Date;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.Timer;
+
+
+public class JavaProject {
+	JList<String> list1;
+	JLabel label1;
+	JTextField text1;
+	JButton SetAlarm;
+	JButton Offbutton;
+	JButton Snooze;
+	DefaultListModel<String> listmodel;
+	JFrame thisGUI;
+	Date date;
+	
+	public static void main(String[] args) {
+		new JavaProject();
+	}
+		
+	public JavaProject(){
+		thisGUI = new JFrame();
+		thisGUI.setTitle("Alarm Clock");
+		thisGUI.setSize(300, 200);
+		thisGUI.setResizable(true);
+		thisGUI.setLocationRelativeTo(null);
+		thisGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		thisGUI.add(new ClockPane());
+		
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+	
+		
+		/*label1 = new JLabel();
+		label1.setText("Alarm System");
+		label1.setBounds(0,0,398,30);
+		label1.setOpaque(true);
+		label1.setBackground(Color.pink);
+		label1.setFont(new Font(label1.getName(), Font.PLAIN, 18));
+		panel.add(label1);
+		*/
+		
+		
+		SetAlarm  = new JButton("Set Alarm");
+		SetAlarm.setBounds(0, 80, 145, 30);
+		panel.add(SetAlarm);
+		
+		Offbutton  = new JButton("Off");
+		Offbutton.setBounds(155, 80, 129, 30);
+		panel.add(Offbutton);
+		
+		Snooze = new JButton("Snooze");
+		Snooze.setBounds(0, 115, 284, 40);
+		panel.add(Snooze);
+		
+				
+		
+		thisGUI.add(panel);
+		thisGUI.setVisible(true);
+		
+	}
+}
+class ClockPane extends JPanel {
+
+	  private JLabel clock = new JLabel();
+
+	  public ClockPane() {
+	    setLayout(new BorderLayout());
+	    tickTock();
+	    add(clock);
+	    Timer timer = new Timer(500, new ActionListener() {
+	      public void actionPerformed1(ActionEvent e) {
+	        tickTock();
+	      }
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+	    });
+	    timer.setRepeats(true);
+	    timer.setCoalesce(true);
+	    timer.setInitialDelay(0);
+	    timer.start();
+	  }
+
+	  public void tickTock() {
+	    clock.setText(DateFormat.getDateTimeInstance().format(new Date()));
+	  }
+	}
