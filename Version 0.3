@@ -1,0 +1,77 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.util.Date;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.Timer;
+
+
+public class JavaProject {
+	JList<String> list1;
+	JLabel label1;
+	JTextField text1;
+	JButton SetAlarm;
+	JButton Offbutton;
+	JButton Snooze;
+	DefaultListModel<String> listmodel;
+	JFrame thisGUI;
+	Date date;
+	
+	public static void main(String[] args) {
+		new JavaProject();
+	}
+		
+	public JavaProject(){
+		thisGUI = new JFrame();
+		thisGUI.setTitle("Alarm Clock");
+		thisGUI.setSize(292, 184);
+		thisGUI.setResizable(false);
+		thisGUI.setLocationRelativeTo(null);
+		thisGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+	
+		
+		label1 = new JLabel();
+		date = new Date();
+		label1.setBounds(0,0,398,80);
+		label1.setOpaque(true);
+		label1.setBackground(Color.pink);
+		label1.setFont(new Font(label1.getName(), Font.BOLD, 19));
+		label1.setText("" + date);
+		panel.add(label1);
+		
+		
+		
+		
+		SetAlarm  = new JButton("Set Alarm");
+		SetAlarm.setBounds(0, 80, 145, 30);
+		panel.add(SetAlarm);
+		
+		Offbutton  = new JButton("Off");
+		Offbutton.setBounds(155, 80, 131, 30);
+		panel.add(Offbutton);
+		
+		Snooze = new JButton("Snooze");
+		Snooze.setBounds(0, 115, 286, 40);
+		panel.add(Snooze);
+		
+				
+		
+		thisGUI.add(panel);
+		thisGUI.setVisible(true);
+		
+	}
+}
