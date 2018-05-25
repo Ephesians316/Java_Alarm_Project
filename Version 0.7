@@ -1,0 +1,156 @@
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.text.DateFormat;
+import java.util.Date;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.Timer;
+
+
+public class JavaProject {
+	JList<String> list1;
+	JLabel label1;
+	JTextField text1;
+	JButton SetAlarm;
+	JButton Offbutton;
+	JButton Snooze;
+	DefaultListModel<String> listmodel;
+	JFrame thisGUI;
+	JFrame Alarmlist;
+	Date date;
+	JTextField text;
+	JTextField text2;
+	JTextField text3;
+	
+	public static void main(String[] args) {
+		new JavaProject();
+	}
+		
+	public JavaProject(){
+		thisGUI = new JFrame();
+		thisGUI.setTitle("Alarm Clock");
+		thisGUI.setSize(292, 208);
+		thisGUI.setResizable(false);
+		thisGUI.setLocationRelativeTo(null);
+		thisGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Alarmlist = new JFrame();
+		Alarmlist.setSize(120,100);
+		Alarmlist.setLocationRelativeTo(null);
+		Alarmlist.setResizable(false);
+
+
+		
+		JPanel panel2 = new JPanel();
+		panel2.setLayout(null);
+		text =  new JTextField(10);
+		text2 = new JTextField (10);
+		text3 = new JTextField (10);
+		text.setText("Hour");
+		text.setBounds(0,30,35,30);
+		text2.setText("Minute");
+		text2.setBounds(37,30,40,30);
+		text3.setText("Seconds");
+		text3.setBounds(80,30,45,30);
+		panel2.add(text);
+		panel2.add(text2);
+		panel2.add(text3);
+		
+
+
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+	
+		
+		label1 = new JLabel();
+		date = new Date();
+		label1.setBounds(0,0,398,80);
+		label1.setOpaque(true);
+		label1.setBackground(Color.lightGray);
+		label1.setFont(new Font(label1.getName(), Font.BOLD, 18));
+		panel.add(label1);
+	
+		
+		
+		SetAlarm  = new JButton("Set Alarm");
+		SetAlarm.setBounds(0, 80, 145, 30);
+		panel.add(SetAlarm);
+		
+		Offbutton  = new JButton("Off");
+		Offbutton.setBounds(155, 80, 131, 30);
+		panel.add(Offbutton);
+		
+		Snooze = new JButton("Snooze");
+		Snooze.setBounds(0, 115, 286, 40);
+		panel.add(Snooze);
+		
+		ListenForSetAlarmButton l4SetAlarm	= new ListenForSetAlarmButton();	
+		SetAlarm.addActionListener(l4SetAlarm);
+		thisGUI.add(panel);
+		thisGUI.setVisible(true);
+		Alarmlist.add(panel2);
+		
+		listmodel = new DefaultListModel<String>();
+		list1 = new JList<String>(listmodel);
+		panel.add(list1);
+		
+		
+		JScrollPane listScroller = new JScrollPane(list1);
+		listScroller.setBounds(0,  70,  400,  300);
+		panel.add(listScroller);
+		
+		JMenuBar menuBar = new JMenuBar();
+		
+		JMenu fileMenu = new JMenu("Options");
+		JMenuItem openMenuItem = new JMenuItem("Set Alarm", KeyEvent.VK_O);
+		fileMenu.add(openMenuItem);
+		fileMenu.addSeparator();
+		JMenuItem printMenuItem = new JMenuItem("Snooze", KeyEvent.VK_P);
+		fileMenu.add(printMenuItem);
+		
+		JMenu editMenu = new JMenu("Info");
+		JMenuItem copyMenuItem = new JMenuItem("About");
+		editMenu.add(copyMenuItem);
+		
+		
+		menuBar.add(fileMenu);
+		menuBar.add(editMenu);
+		thisGUI.add(menuBar);
+		thisGUI.setJMenuBar(menuBar);
+
+
+		while(true) {
+			label1.setText("" + new Date());
+		}
+		
+		
+			
+	}	
+	
+	class ListenForSetAlarmButton implements ActionListener {
+	
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub\
+			Alarmlist.setVisible(true);
+			
+		} 
+			
+			
+	}
+}
